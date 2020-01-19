@@ -7,7 +7,7 @@ const Footer = (props) => {
     <div className="footer">
       <div className="footer__wrapper">
         <div className="copy">
-          All rights reserved 2019
+          All rights reserved 2020
         </div>
       </div>
     </div>
