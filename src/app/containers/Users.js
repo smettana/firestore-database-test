@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { addUser, updateUser, changeFilter } from '../actions/actionCreator';
 
 import Button from '@material-ui/core/Button';
-// import TextField from '@material-ui/core/TextField';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import UserRow from '../components/UserRow';
 import Filters from '../components/Filters'
@@ -142,6 +139,7 @@ class Users extends Component {
     }
 
     render() {
+        const headTitles = ['First Name', 'Last Name', 'Tel', 'State', 'Actions'];
         const state = this.state;
         const { users, filters , changeFilter } = this.props;
         const {firstName, lastName, phone, isActive} = state.userInfo;
@@ -160,11 +158,13 @@ class Users extends Component {
                 </div>
                 <div className="users-wrapper">
                     <div className="users-thead">
-                        <div className="item">First Name</div>
-                        <div className="item">Last Name</div>
-                        <div className="item">Tel</div>
-                        <div className="item">State</div>
-                        <div className="item">Actions</div>
+                        {
+                            headTitles.map(title => {
+                                return(
+                                    <div className="item" key={title}>{title}</div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="users-table">
                         {
@@ -184,72 +184,6 @@ class Users extends Component {
                         }
                     </div>
                 </div>
-                {/* <div className={popupShow ? 'popup show': 'popup'}>
-                    <div className="popup-wrapper">
-
-                        <div className="row">
-                            <TextField
-                                id="firstName"
-                                className="input-field"
-                                label="First name"
-                                margin="normal"
-                                variant="outlined"
-                                name="firstName"
-                                value={firstName}
-                                onChange={this.handleInputChange}
-                            />
-                        </div>
-                        <div className="row">
-                            <TextField
-                                id="lastName"
-                                className="input-field"
-                                label="Last name"
-                                margin="normal"
-                                variant="outlined"
-                                name="lastName"
-                                value={lastName}
-                                onChange={this.handleInputChange}
-                            />
-                        </div>
-                        <div className="row">
-                            <TextField
-                                id="phone"
-                                className="input-field"
-                                label="Phone"
-                                margin="normal"
-                                variant="outlined"
-                                name="phone"
-                                value={phone}
-                                type="number"
-                                onChange={this.handleInputChange}
-                            />
-                        </div>
-                        {
-                            fieldsError && <div className="row error">Please fill in all the inputs</div>
-                        }
-                        <div className="row">
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={isActive}
-                                        name="isActive"
-                                        onChange={this.handleCheckboxChange}
-                                    />
-                                }
-                                label="isActive"
-                                />
-                        </div>
-                        <div className="row row-btns">
-                            <Button variant="contained" color="primary" className="active-action" onClick={userEdit ? this.updateUser : this.addUser}>
-                                {userEdit ? 'Update user' : 'Save user'}
-                            </Button>
-                            <Button variant="contained" color="secondary" className="passive-action" onClick={this.closePopupBtnListener}>
-                                Cancel
-                            </Button>
-                        </div>
-                    </div>
-                    
-                </div> */}
                 <Popup 
                     firstName={firstName} 
                     lastName={lastName} 
