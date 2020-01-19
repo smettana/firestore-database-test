@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from "lodash";
 
-import { addUser, updateUser, changeFilter } from '../actions/actionCreator';
+import { fetchUsers, addUser, updateUser, changeFilter } from '../actions/actionCreator';
 
 import Button from '@material-ui/core/Button';
 
@@ -80,9 +81,9 @@ class Users extends Component {
     }
 
     addUser = () => {
-        const {firstName, lastName, phone, isActive} = this.state.userInfo;
+        const { firstName, lastName, phone, isActive } = this.state.userInfo;
         const id = +new Date();
-
+        
         const { addUser } = this.props;
 
         if(firstName === '' || lastName === '' || phone === ''){
@@ -90,7 +91,7 @@ class Users extends Component {
                 fieldsError: !fieldsError
             }));
         }else{
-            addUser(id, firstName, lastName, phone, isActive);
+            addUser({id, firstName, lastName, phone, isActive});
 
             this.setState((popupShow) => ({
                 userInfo: {
@@ -107,6 +108,7 @@ class Users extends Component {
     }
 
     filterUsers = (users, activefilter) => {
+        // console.log(users)
         switch (activefilter) {
             case 'active':
                 return users.filter(user => user.isActive);
@@ -122,7 +124,7 @@ class Users extends Component {
         const { updateUser } = this.props;
 
         console.log(id);
-        updateUser(id, firstName, lastName, phone, isActive);
+        updateUser({id, firstName, lastName, phone, isActive});
 
         this.setState((popupShow) => ({
             userInfo: {
@@ -136,6 +138,15 @@ class Users extends Component {
             fieldsError: false,
             userEdit: false
         }));
+    }
+
+    componentDidMount() {
+        console.log(this.props.users);
+        if(this.props.users.length === 0){
+            console.log('ura');
+            this.props.fetchUsers();
+        }
+        
     }
 
     render() {
@@ -206,4 +217,4 @@ class Users extends Component {
 export default connect(({users, filters}) => ({
     users,
     filters
-}), { addUser, updateUser, changeFilter })(Users);
+}), { fetchUsers, addUser, updateUser, changeFilter })(Users);
