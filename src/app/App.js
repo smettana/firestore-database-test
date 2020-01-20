@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 
 import HelloPage from './components/HelloPage';
 import Users from './containers/Users';
-import User from './components/User';
+import User from './containers/User';
 
 import {
 	BrowserRouter as Router,

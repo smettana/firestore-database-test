@@ -11,36 +11,8 @@ export const fetchUsers = () => async dispatch => {
     });
 };
 
-// export const addUser = (id, firstName, lastName, phone, isActive) => ({
-//     type: ADD_USER,
-//     id,
-//     firstName,
-//     lastName,
-//     phone,
-//     isActive
-// });
-
-// export const updateUser = (id, firstName, lastName, phone, isActive) => ({
-//     type: UPDATE_USER,
-//     id,
-//     firstName,
-//     lastName,
-//     phone,
-//     isActive
-// });
-
-
 export const addUser = (newUser) => async dispatch => {
     usersRef.child(newUser.id).set(newUser)
-    // usersRef.on('child_added', (snapshot) => {
-    //     const users = Object.values(snapshot.val());
-    //     const usersLength = users.length;
-    //     const lastItem = users[usersLength-1];
-    //     dispatch({
-    //         type: ADD_USER,
-    //         payload: {}
-    //     });
-    // });
 };
 
 export const updateUser = (newInfo) => async dispatch => {

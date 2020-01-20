@@ -16,11 +16,10 @@ class User extends Component {
         });
     }
     render() {
-
         const {firstName, lastName, phone, isActive} = this.state.info;
-        console.log(firstName)
+
         return (
-            <div className="page-wrapper">
+            <div className="content-wrapper">
                 <div className="user-info">
                     <h1>User info</h1>
                     <p>First name: <b>{firstName}</b></p>

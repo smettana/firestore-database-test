@@ -29,7 +29,6 @@ class Users extends Component {
         if(e.currentTarget.getAttribute('data-name') === 'edit'){
             const { users } = this.props;
             const editableUserInfo = users.filter(user => user.id === +e.currentTarget.getAttribute('data-id'))[0];
-            console.log(editableUserInfo.id)
             this.setState(({popupShow, userEdit}) => ({
                 userInfo: {
                     firstName: editableUserInfo.firstName,
@@ -108,7 +107,6 @@ class Users extends Component {
     }
 
     filterUsers = (users, activefilter) => {
-        // console.log(users)
         switch (activefilter) {
             case 'active':
                 return users.filter(user => user.isActive);
@@ -123,7 +121,6 @@ class Users extends Component {
         const id = this.state.editableUserId;
         const { updateUser } = this.props;
 
-        console.log(id);
         updateUser({id, firstName, lastName, phone, isActive});
 
         this.setState((popupShow) => ({
@@ -141,12 +138,7 @@ class Users extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.users);
-        if(this.props.users.length === 0){
-            console.log('ura');
-            this.props.fetchUsers();
-        }
-        
+        this.props.fetchUsers();
     }
 
     render() {
@@ -160,12 +152,12 @@ class Users extends Component {
         const filteredUsers = this.filterUsers(users, filters);
 
         return(
-            <div className="page-wrapper">
+            <div className="content-wrapper">
                 <div className="global-actions">
                     <Button variant="contained" className="button-add" data-name="add" onClick={this.popupBtnClickListener} >
                         Add User
                     </Button>
-                    <Filters changeFilter={changeFilter}/>
+                    {users.length > 0 ? <Filters changeFilter={changeFilter}/> : null }
                 </div>
                 <div className="users-wrapper">
                     <div className="users-thead">

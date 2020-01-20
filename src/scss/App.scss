@@ -38,10 +38,10 @@ body{
   }
 }
 
-.page-wrapper{
+.content-wrapper{
   position: relative;
-  height: calc(100vh - 183px);
-  min-height: 400px;
+  min-height: calc(100vh - 183px);
+  height: auto;
 }
 
 .hello-title{

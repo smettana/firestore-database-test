@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const HelloPage = ({title}) => {
   return (
 
-    <div className="page-wrapper">
+    <div className="content-wrapper">
       <div className="hello-title">
         { title }
       </div>
